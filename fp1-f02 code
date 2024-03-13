@@ -1,0 +1,86 @@
+# ---- FP1-F02 - Shopping List ---- #
+# ---- Xzavier Mooosomin ---- #
+# ---- 03/13/2024 ---- #
+
+# -- Imports -- #
+
+import time
+
+# -- Dictionaries/Lists -- #
+
+shoplist = { }
+
+
+# -- Variables -- #
+
+create = 1
+
+# -- Functions -- #
+
+
+# ---- Main Code ---- #
+
+print("Let's make you a shopping list, because you're forgetful.")
+
+while create == 1:
+    list_choice = input("""
+What do you want to do?
+1 - Add Item
+2 - Remove Item
+3 - Print list
+4 - Finish
+>
+""")
+    
+    if list_choice == "1" or list_choice.lower() == "add item":
+        add_item = input("What item do you want to add?\n>")
+        add_price = int(input("How much would it cost?\n>")) # takes user's input as a number, not string
+        print("Adding together", add_item, "and have its price be", add_price, "dollars.")
+        # creates a key and sets add_price to it's value
+        shoplist[add_item] = add_price
+        
+    elif list_choice == "2" or list_choice.lower() == "remove item":
+        print(shoplist)
+        remove_choice = input("What item do you want to remove?\n>")
+        
+        if remove_choice in shoplist:
+            del shoplist[remove_choice] # removes the key from the dictionary
+            print("Removed successfully.")
+            
+        else:
+            print("You don't have that.") # if item not in list, brings out this error
+            
+    elif list_choice == "3" or list_choice.lower() == "print list":
+        print("Here's your list.")
+        print(shoplist.keys(), ": Items")
+        print(shoplist.values(), ": Value")
+        print(shoplist.items(), ": Paired") 
+        
+        modify = input("Do you want to modify an item?\n1 - Yes\n2 - No\n>")
+        if modify == "1" or modify.lower() == "yes":
+            modify_choice = input("What item do you want to modify?\n>")
+            
+            if modify_choice in shoplist:
+                modify_amt = int(input("What do you want its price to be?\n>"))
+                
+                shoplist[modify_choice] = modify_amt # changes the key's value to another
+                
+                print("The new price for", modify_choice, "is", modify_amt, "dollars.")
+                
+            else:
+                print("You don't have that item, uh oh.")
+            
+        else:
+            print("No? Okay.")
+            
+    elif list_choice == "4" or list_choice.lower() == "finish":
+        confirm = input("Are you sure you want to finish?\n1 - Yes\n2 - No\n>")
+        if confirm == "1" or confirm.lower() == "yes":
+            print("Okay, uh, the maximum cost for your stuff is...")
+            time.sleep(2)
+            print(sum(shoplist.values()), "dollars.")
+            time.sleep(2)
+            print("Bye bye! *starts gooning*")
+            create = 0
+            
+            
